@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+  mysql:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_DATABASE=nodetest
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - TZ=America/New_York
+    volumes:
+      - nodetest:/var/lib/mysql
+  app:
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      - ./config:/root/app/config
+      - ./src:/root/app/src
+    restart: 'always'
+    depends_on:
+      - mysql
+
+volumes:
+  nodetest:

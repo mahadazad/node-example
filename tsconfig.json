@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+      "target": "es5",
+      "allowJs": true,
+      "skipLibCheck": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "strict": true,
+      "forceConsistentCasingInFileNames": true,
+      "moduleResolution": "node",
+      "resolveJsonModule": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "strictPropertyInitialization": false,
+      "module": "commonjs",
+      "baseUrl": "src",
+      "lib": ["es2018", "esnext.asynciterable"],
+      "outDir": "build"
+  },
+  "files": ["src/.d.ts"],
+  "include": ["src"]
+}
