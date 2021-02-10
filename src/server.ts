@@ -1,9 +1,9 @@
 import 'reflect-metadata';
-import express from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import config from 'config';
 import bodyParser from 'body-parser';
 import { createConnection, ConnectionOptions } from 'typeorm';
-import { Container } from 'typedi';
+import { createLogger, transports } from 'winston';
 
 require('dotenv').config();
 
@@ -11,6 +11,10 @@ import * as entities from './entities';
 import { initRoutes } from './routes';
 
 const PORT = 3000;
+
+const logger = createLogger({
+  transports: [new transports.File({ filename: 'error.log' })],
+});
 
 async function bootstrap() {
   try {
@@ -31,11 +35,19 @@ async function bootstrap() {
 
     app.use(bodyParser.json());
 
+    app.use((err: Error, _req: Request, _res: Response, next: NextFunction) => {
+      if (err) {
+        logger.error(err);
+      }
+      next();
+    });
+
     initRoutes(app);
 
     app.listen({ port: PORT }, () => console.log(`🚀 Server ready at http://localhost:${PORT} `));
   } catch (e) {
     console.error(e);
+    logger.error(e);
   }
 }
 

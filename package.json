@@ -21,6 +21,7 @@
     "typedi": "^0.10.0",
     "typeorm": "^0.2.30",
     "typeorm-typedi-extensions": "^0.4.0",
+    "winston": "^3.3.3",
     "yup": "^0.32.8"
   },
   "devDependencies": {
